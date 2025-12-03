@@ -62,6 +62,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>nl.hu.s4</groupId>
+            <artifactId>lingo-hidden-tests</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
     </dependencies>
 
     <build>
@@ -95,22 +103,7 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>ci-hidden-tests</id>
-            <dependencies>
-                <dependency>
-                    <groupId>nl.hu.s4</groupId>       <!-- use your actual groupId -->
-                    <artifactId>lingo-hidden-tests</artifactId>
-                    <version>1.0.0</version>
-                    <scope>system</scope>            <!-- 👈 important -->
-                    <systemPath>
-                        ${project.basedir}/../ci-libs/lingo-hidden-tests-1.0.0-tests.jar
-                    </systemPath>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+
 
 
 </project>

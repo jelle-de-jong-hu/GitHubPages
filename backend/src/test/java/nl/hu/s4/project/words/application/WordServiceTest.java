@@ -1,14 +1,15 @@
-package nl.hu.cisq1.lingo.words.application;
+package nl.hu.s4.project.words.application;
 
-import nl.hu.cisq1.lingo.words.data.WordRepository;
-import nl.hu.cisq1.lingo.words.domain.Word;
-import nl.hu.cisq1.lingo.words.domain.exception.WordLengthNotSupportedException;
+
+import nl.hu.s4.project.words.data.WordRepository;
+import nl.hu.s4.project.words.domain.Word;
+import nl.hu.s4.project.words.domain.exception.WordLengthNotSupportedException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Value;
+
 
 import java.util.Optional;
 import java.util.stream.Stream;
