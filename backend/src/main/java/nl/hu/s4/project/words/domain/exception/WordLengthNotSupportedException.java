@@ -1,4 +1,4 @@
-package nl.hu.cisq1.lingo.words.domain.exception;
+package nl.hu.s4.project.words.domain.exception;
 
 public class WordLengthNotSupportedException extends RuntimeException {
     public WordLengthNotSupportedException(Integer length) {

@@ -10,7 +10,7 @@
          (een veel-voorkomende, oninteressante vergissing)
      -->
 
-    <groupId>nl.hu.s3</groupId>
+    <groupId>nl.hu.s4</groupId>
     <artifactId>project-parent</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>

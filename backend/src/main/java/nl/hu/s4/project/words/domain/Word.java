@@ -1,4 +1,4 @@
-package nl.hu.cisq1.lingo.words.domain;
+package nl.hu.s4.project.words.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

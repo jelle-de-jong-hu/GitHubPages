@@ -1,4 +1,4 @@
-package nl.hu.s3.project;
+package nl.hu.s4.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

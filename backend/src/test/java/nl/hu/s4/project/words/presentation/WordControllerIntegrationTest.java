@@ -1,7 +1,7 @@
-package nl.hu.cisq1.lingo.words.presentation;
+package nl.hu.s4.project.words.presentation;
 
-import nl.hu.cisq1.lingo.words.data.WordRepository;
-import nl.hu.cisq1.lingo.words.domain.Word;
+import nl.hu.s4.project.words.data.WordRepository;
+import nl.hu.s4.project.words.domain.Word;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc

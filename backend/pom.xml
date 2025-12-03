@@ -8,7 +8,7 @@
         <version>3.5.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>nl.hu.s3</groupId>
+    <groupId>nl.hu.s4</groupId>
     <artifactId>games-api</artifactId>
     <version>0.0.1</version>
     <name>games-api</name>
@@ -70,7 +70,47 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ci-hidden-tests</id>
+            <dependencies>
+                <dependency>
+                    <groupId>nl.hu.s4</groupId>       <!-- use your actual groupId -->
+                    <artifactId>lingo-hidden-tests</artifactId>
+                    <version>1.0.0</version>
+                    <scope>system</scope>            <!-- 👈 important -->
+                    <systemPath>
+                        ${project.basedir}/../ci-libs/lingo-hidden-tests-1.0.0-tests.jar
+                    </systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
 
 </project>
