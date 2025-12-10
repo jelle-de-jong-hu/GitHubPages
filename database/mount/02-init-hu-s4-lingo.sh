@@ -5,4 +5,4 @@ set -e
 PGPASSWORD="hu-s4-lingo-pwd" psql \
   --username="hu-s4-lingo-dbadmin" \
   --dbname="hu-s4-lingo" \
-  -f /docker-entrypoint-initdb.d/lingo_words.sql
+    -f /docker-entrypoint-initdb.d/lingo_words.sql
