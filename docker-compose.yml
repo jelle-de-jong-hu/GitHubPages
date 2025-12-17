@@ -17,4 +17,4 @@ services:
       - "./database/mount:/docker-entrypoint-initdb.d"
 
       # Optional volume: saves data between docker runs
-      - "./database/data:/var/lib/postgresql/data"
+      - "./database/data:/var/lib/postgresql"
