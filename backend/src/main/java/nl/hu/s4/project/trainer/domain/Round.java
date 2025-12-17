@@ -7,4 +7,8 @@ public class Round {
     private long id;
     private String wordToGuess;
     private List<Feedback> attempts;
+
+    public List<Feedback> guess(String attempt) {
+
+    }
 }

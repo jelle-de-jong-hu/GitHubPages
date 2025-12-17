@@ -19,6 +19,6 @@ We gaan het "trainer" component aanmaken en de laag waarin onze klassen thuishor
 #### Maak de laag aan waar de klassen terecht moeten komen.
 
 ## Stap 3
-Implementeer de klassen, enums en interfaces in Java. Zorg ervoor dat je de attributen en relaties zoals weergegeven in het diagram correct implementeert.
+Implementeer het klasse diagram in Java. Zorg ervoor dat je de attributen en relaties zoals weergegeven in het diagram correct implementeert.
 
 **Je hoeft nog geen methoden toe te voegen, alleen de attributen en relaties.**
