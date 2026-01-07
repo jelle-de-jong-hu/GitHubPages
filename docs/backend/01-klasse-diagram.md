@@ -20,6 +20,7 @@ classDiagram
     class Feedback {
         -guess : String
         -marks : List~Mark~
+        -hint : String[]
     }
 
     class Progress {
