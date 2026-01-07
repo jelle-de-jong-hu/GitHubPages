@@ -6,38 +6,44 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Feedback {
-    private String attempt;
+    private Attempt attempt;
     private List<Mark> marks;
 
     Feedback() {
 
     }
 
-    public static Feedback createFeedback(String attempt, String solution) {
+    public static Feedback createFeedback(Attempt attempt, String solution) {
         Feedback feedback = new Feedback();
         feedback.attempt = attempt;
-
+        feedback.generateMarks(solution, attempt);
         return feedback;
     }
 
-    private List<Mark> generateMarks(String solution, String attempt) {
-        var marks = Collections.emptyList();
+    public List<Mark> getMarks() {
+        return marks;
+    }
+
+    public Attempt getAttempt() {
+        return attempt;
+    }
+
+    private void generateMarks(String solution, Attempt attempt) {
         var nrLetters = solution.length();
 
         if(!attempt.isValid()){
             marks = Collections.nCopies(nrLetters, Mark.INVALID);
-            return;
         }
 
         var possiblyPresent = IntStream
                 .range(0, nrLetters)
-                .filter(i -> solution.charAt(i) != attempt.charAt(i))
+                .filter(i -> solution.charAt(i) != attempt.attempt().charAt(i))
                 .mapToObj(solution::charAt)
                 .collect(Collectors.toList());
 
-        this.feedback = IntStream.range(0, nrLetters).mapToObj(i -> {
+        this.marks = IntStream.range(0, nrLetters).mapToObj(i -> {
             var solutionLetter = solution.charAt(i);
-            var attemptLetter = attempt.charAt(i);
+            var attemptLetter = attempt.attempt().charAt(i);
 
             return solutionLetter == attemptLetter
                     ? Mark.CORRECT

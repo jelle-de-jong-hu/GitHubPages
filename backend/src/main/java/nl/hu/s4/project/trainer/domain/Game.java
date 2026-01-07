@@ -23,7 +23,7 @@ public class Game {
         return 0;
     }
 
-    public Progress guessWord(String attempt) {
+    public Progress guessWord(Attempt attempt) {
         rounds.getLast().guess(attempt);
         return null;
     }
