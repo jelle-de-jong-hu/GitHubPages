@@ -9,12 +9,13 @@ services:
       # and it will patch it through to the container-port 5432
       - "15432:5432"
     environment:
-      # So the database-superuser is called postgres/admin
-      # The account our application will use is configured in init.sql
-      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=hu-s4-lingo-dbadmin
+      - POSTGRES_PASSWORD=hu-s4-lingo-pwd
+      - POSTGRES_DB=hu-s4-lingo
     volumes:
-      # Required volume: creates the initial db and user
-      - "./database/mount:/docker-entrypoint-initdb.d"
+      # Mount SQL init files (portable across OSes)
+      - "./database/mount/01-init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro"
+      - "./database/mount/lingo_words.sql:/docker-entrypoint-initdb.d/lingo_words.sql:ro"
 
       # Use a named docker volume for Postgres data
       - "pgdata:/var/lib/postgresql"
