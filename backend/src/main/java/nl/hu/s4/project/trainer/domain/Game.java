@@ -12,10 +12,11 @@ public class Game {
     Game() {
     }
 
-    public static Game startGame() {
+    public static Game startGame(String solution) {
         Game game = new Game();
         game.status = GameStatus.NEW;
         game.rounds = new ArrayList<Round>();
+        game.rounds.add(new Round(solution));
         return game;
     }
 

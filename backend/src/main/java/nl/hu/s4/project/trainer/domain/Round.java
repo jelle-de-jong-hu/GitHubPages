@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Round {
 
+    private static final int MAX_ATTEMPTS = 5;
+
     private long id;
     private final String solution;
     private final List<Feedback> attempts;
@@ -12,10 +14,6 @@ public class Round {
     public Round(String solution) {
         this.solution = solution;
         attempts = new ArrayList<>();
-    }
-
-    public String getSolution() {
-        return solution;
     }
 
     public long getId() {
@@ -27,6 +25,10 @@ public class Round {
     }
 
     public List<Feedback> guess(Attempt attempt) {
+        if (attempts.size() >= MAX_ATTEMPTS) {
+            throw new IllegalStateException("Maximum number of attempts reached");
+        }
+
         attempts.add(Feedback.createFeedback(attempt, solution));
         return attempts;
     }
