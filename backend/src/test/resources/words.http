@@ -1,0 +1,19 @@
+# Variables
+host = http://localhost:8080/api
+word = example
+
+### List all words
+GET {{host}}/words
+Accept: application/json
+
+### Get a random word (change length as needed)
+GET {{host}}/words/random?length=5
+Accept: application/json
+
+### Get a random word (example for 6 letters)
+GET {{host}}/words/random?length=6
+Accept: application/json
+
+### Delete a word (replace {{word}} or change the `word` variable above)
+DELETE {{host}}/words/{{word}}
+Accept: application/json

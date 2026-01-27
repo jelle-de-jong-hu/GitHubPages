@@ -1,8 +1,7 @@
 package nl.hu.s4.project.trainer.domain;
 
 public enum GameStatus {
-    NEW,
     IN_PROGRESS,
-    WON,
+    LAST_ROUND_WON,
     LOST;
 }

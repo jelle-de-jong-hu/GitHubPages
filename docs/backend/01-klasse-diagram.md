@@ -35,7 +35,7 @@ classDiagram
         <<enumeration>>
         NEW
         IN_PROGRESS
-        WON
+        LAST_ROUND_WON
         LOST
     }
 

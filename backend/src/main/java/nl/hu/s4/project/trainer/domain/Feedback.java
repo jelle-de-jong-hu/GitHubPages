@@ -1,22 +1,39 @@
 package nl.hu.s4.project.trainer.domain;
 
+import jakarta.persistence.*;
+import nl.hu.s4.project.trainer.data.MarksConverter;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Entity
 public class Feedback {
-    private final Attempt attempt;
-    private final List<Mark> marks;
+    @Embedded
+    private Attempt attempt;
+    @Convert(converter = MarksConverter.class)
+    private List<Mark> marks;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     private Feedback(Attempt attempt, List<Mark> marks) {
         this.attempt = attempt;
         this.marks = marks;
     }
 
+    public Feedback() {
+
+    }
+
     public static Feedback createFeedback(Attempt attempt, String solution) {
         var marks = generateMarks(solution, attempt);
         return new Feedback(attempt, marks);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public List<Mark> getMarks() {
@@ -27,30 +44,45 @@ public class Feedback {
         return attempt;
     }
 
+    public boolean isSolved() {
+        return marks.stream().allMatch(m -> m == Mark.CORRECT);
+    }
+
     private static List<Mark> generateMarks(String solution, Attempt attempt) {
         var nrLetters = solution.length();
 
-        if(!attempt.isValid()){
+        String attemptString = attempt.attempt().toLowerCase();
+
+        if(!attempt.isValid() || attemptString.length() != nrLetters) {
            return Collections.nCopies(nrLetters, Mark.INVALID);
         }
 
+        var possiblyPresent = new ArrayList<Character>();
+        for (int i = 0; i < nrLetters; i++) {
+            var solutionLetter = solution.charAt(i);
+            var attemptLetter = attemptString.charAt(i);
 
-        var possiblyPresent = IntStream
-                .range(0, nrLetters)
-                .filter(i -> solution.charAt(i) != attempt.attempt().charAt(i))
-                .mapToObj(solution::charAt)
-                .collect(Collectors.toList());
+            if (solutionLetter != attemptLetter) {
+                possiblyPresent.add(solutionLetter);
+            }
+        }
 
         return IntStream.range(0, nrLetters).mapToObj(i -> {
             var solutionLetter = solution.charAt(i);
-            var attemptLetter = attempt.attempt().charAt(i);
+            var attemptLetter = attemptString.charAt(i);
 
-            return solutionLetter == attemptLetter
-                    ? Mark.CORRECT
-                    : possiblyPresent.remove((Character) attemptLetter) // Boxing needed to call correct overload
-                    ? Mark.PRESENT
-                    : Mark.ABSENT;
+            if (solutionLetter == attemptLetter) {
+                checkIfPossiblyPresentAndRemove(possiblyPresent, attemptLetter);
+                return Mark.CORRECT;
+            } else if (checkIfPossiblyPresentAndRemove(possiblyPresent, attemptLetter)) {
+                return Mark.PRESENT;
+            } else {
+                return Mark.ABSENT;
+            }
         }).toList();
     }
 
+    private static boolean checkIfPossiblyPresentAndRemove(List<Character> possiblyPresent, char attemptLetter) {
+        return possiblyPresent.remove((Character) attemptLetter);
+    }
 }
