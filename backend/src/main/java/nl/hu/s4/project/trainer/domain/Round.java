@@ -1,6 +1,7 @@
 package nl.hu.s4.project.trainer.domain;
 
 import jakarta.persistence.*;
+import nl.hu.s4.project.trainer.domain.exception.MaxAttemptsReachedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +42,7 @@ public class Round {
 
     void guess(Attempt attempt) {
         if (attempts.size() >= MAX_ATTEMPTS) {
-            throw new IllegalStateException("Maximum number of attempts reached");
+            throw new MaxAttemptsReachedException();
         }
 
         attempts.add(Feedback.createFeedback(attempt, solution));

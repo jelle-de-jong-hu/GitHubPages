@@ -1,5 +1,6 @@
 package nl.hu.s4.project.trainer.domain;
 
+import nl.hu.s4.project.trainer.domain.exception.MaxAttemptsReachedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -68,10 +69,8 @@ class RoundTest {
         round.guess(new Attempt("ddddd", true));
         round.guess(new Attempt("eeeee", true));
 
-        IllegalStateException ex = assertThrows(IllegalStateException.class,
+        assertThrows(MaxAttemptsReachedException.class,
                 () -> round.guess(new Attempt(FIVE_LETTER_ATTEMPT, true)));
-
-        assertEquals("Maximum number of attempts reached", ex.getMessage());
     }
 
     static Stream<Arguments> scoreExamples() {
