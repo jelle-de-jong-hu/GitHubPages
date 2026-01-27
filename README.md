@@ -8,11 +8,12 @@ Om de backend lokaal te draaien, heb je docker nodig.
 1. Clone de repository
 2. Navigeer in de terminal naar de hoofdmap van het project
 3. Start de docker met het volgende commando:
-4.  ```bash
+
+```bash
    docker-compose up
    ```  
-5. De database is nu bereikbaar op `localhost:15432`
-6. Start de backend server met het volgende commando:
+4. De database is nu bereikbaar op `localhost:15432`
+5. Start de backend server met het volgende commando:
    ```bash
    cd backend
    mvn spring-boot:run
