@@ -88,14 +88,6 @@
             <version>${jjwt.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <dependency>
-            <groupId>nl.hu.s4</groupId>
-            <artifactId>lingo-hidden-tests</artifactId>
-            <version>1.0.0</version>
-            <scope>test</scope>
-            <classifier>tests</classifier>
-        </dependency>
     </dependencies>
 
     <build>
