@@ -33,7 +33,7 @@ Om dit project lokaal te draaien, heb je [Node.js](https://nodejs.org/) nodig.
    ```
 4. Start de ontwikkelserver met het volgende commando:
    ```bash
-   npm start
+   npm run dev
    ```
 5. Open je webbrowser en ga naar `http://localhost:3000` om de applicatie te bekijken.
 
