@@ -1,7 +1,7 @@
-package nl.hu.s4.project.trainer.application;
+package nl.hu.s4.project.lingo.application;
 
-import nl.hu.s4.project.trainer.domain.Feedback;
-import nl.hu.s4.project.trainer.domain.GameStatus;
+import nl.hu.s4.project.lingo.domain.Feedback;
+import nl.hu.s4.project.lingo.domain.GameStatus;
 
 import java.util.List;
 

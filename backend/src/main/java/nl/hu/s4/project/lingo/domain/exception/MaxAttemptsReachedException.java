@@ -1,4 +1,4 @@
-package nl.hu.s4.project.trainer.domain.exception;
+package nl.hu.s4.project.lingo.domain.exception;
 
 public class MaxAttemptsReachedException extends RuntimeException{
     public MaxAttemptsReachedException() {

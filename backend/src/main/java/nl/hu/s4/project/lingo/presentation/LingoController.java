@@ -1,8 +1,8 @@
-package nl.hu.s4.project.trainer.presentation;
+package nl.hu.s4.project.lingo.presentation;
 
-import nl.hu.s4.project.trainer.application.GameNotFoundException;
-import nl.hu.s4.project.trainer.application.LingoTrainerService;
-import nl.hu.s4.project.trainer.application.Progress;
+import nl.hu.s4.project.lingo.application.GameNotFoundException;
+import nl.hu.s4.project.lingo.application.LingoService;
+import nl.hu.s4.project.lingo.application.Progress;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,24 +10,24 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/trainer")
+@RequestMapping("/lingo")
 public class LingoController {
 
-    private final LingoTrainerService trainerService;
+    private final LingoService lingoService;
 
-    public LingoController(LingoTrainerService trainerService) {
-        this.trainerService = trainerService;
+    public LingoController(LingoService lingoService) {
+        this.lingoService = lingoService;
     }
 
     @PostMapping
     public Progress startNewGame() {
-        return trainerService.startNewGame();
+        return lingoService.startNewGame();
     }
 
     @PatchMapping("/{gameId}")
     public Progress guess(@PathVariable long gameId, @RequestBody Attempt attempt) {
         try {
-            return trainerService.guess(gameId, attempt.attempt());
+            return lingoService.guess(gameId, attempt.attempt());
         } catch (GameNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class LingoController {
     @PatchMapping("/{gameId}/round")
     public Progress startNewRound(@PathVariable long gameId) {
         try {
-            return trainerService.startNewRound(gameId);
+            return lingoService.startNewRound(gameId);
         } catch (GameNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (Exception e) {
@@ -49,15 +49,15 @@ public class LingoController {
     @GetMapping("/{gameId}")
     public Progress findGameById(@PathVariable long gameId) {
         try {
-            return trainerService.getGameById(gameId);
+            return lingoService.getGameById(gameId);
         } catch (GameNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Progress> findAllGames() {
-        return trainerService.getGames();
+        return lingoService.getGames();
     }
 
 }

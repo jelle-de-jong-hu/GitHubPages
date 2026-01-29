@@ -1,16 +1,16 @@
-package nl.hu.s4.project.trainer.domain;
+package nl.hu.s4.project.lingo.domain;
 
 import jakarta.persistence.*;
-import nl.hu.s4.project.trainer.domain.exception.GameOverException;
-import nl.hu.s4.project.trainer.domain.exception.InvalidWordLengthException;
-import nl.hu.s4.project.trainer.domain.exception.NoActiveRoundException;
-import nl.hu.s4.project.trainer.domain.exception.RoundAlreadyStartedException;
+import nl.hu.s4.project.lingo.domain.exception.GameOverException;
+import nl.hu.s4.project.lingo.domain.exception.InvalidWordLengthException;
+import nl.hu.s4.project.lingo.domain.exception.NoActiveRoundException;
+import nl.hu.s4.project.lingo.domain.exception.RoundAlreadyStartedException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class LingoTrainer {
+public class Lingo {
 
     private static final int MAX_WORD_LENGTH = 7;
     public static final int MIN_WORD_LENGTH = 5;
@@ -24,15 +24,15 @@ public class LingoTrainer {
     @Enumerated(EnumType.STRING)
     private GameStatus status;
 
-    public LingoTrainer() {
+    public Lingo() {
     }
 
-    public static LingoTrainer startGame(String solution) {
-        LingoTrainer lingoTrainer = new LingoTrainer();
-        lingoTrainer.status = GameStatus.IN_PROGRESS;
-        lingoTrainer.rounds = new ArrayList<>();
-        lingoTrainer.rounds.add(new Round(solution));
-        return lingoTrainer;
+    public static Lingo startGame(String solution) {
+        Lingo lingo = new Lingo();
+        lingo.status = GameStatus.IN_PROGRESS;
+        lingo.rounds = new ArrayList<>();
+        lingo.rounds.add(new Round(solution));
+        return lingo;
     }
 
     public long getId() {

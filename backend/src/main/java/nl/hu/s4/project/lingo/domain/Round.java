@@ -1,7 +1,7 @@
-package nl.hu.s4.project.trainer.domain;
+package nl.hu.s4.project.lingo.domain;
 
 import jakarta.persistence.*;
-import nl.hu.s4.project.trainer.domain.exception.MaxAttemptsReachedException;
+import nl.hu.s4.project.lingo.domain.exception.MaxAttemptsReachedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

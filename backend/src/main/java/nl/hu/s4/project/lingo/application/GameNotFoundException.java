@@ -1,4 +1,4 @@
-package nl.hu.s4.project.trainer.application;
+package nl.hu.s4.project.lingo.application;
 
 public class GameNotFoundException extends RuntimeException {
     public GameNotFoundException(Long id) {

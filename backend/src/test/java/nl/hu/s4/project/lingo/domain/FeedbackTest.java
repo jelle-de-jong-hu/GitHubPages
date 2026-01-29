@@ -1,4 +1,4 @@
-package nl.hu.s4.project.trainer.domain;
+package nl.hu.s4.project.lingo.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;

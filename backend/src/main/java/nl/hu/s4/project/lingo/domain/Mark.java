@@ -1,4 +1,4 @@
-package nl.hu.s4.project.trainer.domain;
+package nl.hu.s4.project.lingo.domain;
 
 public enum Mark {
     CORRECT,

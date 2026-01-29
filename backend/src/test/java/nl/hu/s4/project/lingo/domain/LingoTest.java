@@ -1,9 +1,9 @@
-package nl.hu.s4.project.trainer.domain;
+package nl.hu.s4.project.lingo.domain;
 
-import nl.hu.s4.project.trainer.domain.exception.GameOverException;
-import nl.hu.s4.project.trainer.domain.exception.InvalidWordLengthException;
-import nl.hu.s4.project.trainer.domain.exception.NoActiveRoundException;
-import nl.hu.s4.project.trainer.domain.exception.RoundAlreadyStartedException;
+import nl.hu.s4.project.lingo.domain.exception.GameOverException;
+import nl.hu.s4.project.lingo.domain.exception.InvalidWordLengthException;
+import nl.hu.s4.project.lingo.domain.exception.NoActiveRoundException;
+import nl.hu.s4.project.lingo.domain.exception.RoundAlreadyStartedException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("LingoTrainer")
-class LingoTrainerTest {
+@DisplayName("Lingo")
+class LingoTest {
 
     private static Attempt validAttempt(String word) {
         return new Attempt(word, true);
@@ -34,12 +34,12 @@ class LingoTrainerTest {
         @Test
         @DisplayName("startGame zet status IN_PROGRESS en start met één ronde")
         void startGame_setsInitialState() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
 
-            assertEquals(GameStatus.IN_PROGRESS, trainer.getStatus());
-            assertEquals(1, trainer.getRoundNumber());
-            assertEquals(0, trainer.getAttemptCount());
-            assertEquals("", trainer.getSolution());
+            assertEquals(GameStatus.IN_PROGRESS, lingo.getStatus());
+            assertEquals(1, lingo.getRoundNumber());
+            assertEquals(0, lingo.getAttemptCount());
+            assertEquals("", lingo.getSolution());
         }
     }
 
@@ -51,34 +51,34 @@ class LingoTrainerTest {
         @Test
         @DisplayName("getWordLengthForNextRound berekent juiste woordlengte per ronde: 5 -> 6")
         void getWordLengthForNextRound_variesWithRoundCount_5_6() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
 
-            assertEquals(6, trainer.getWordLengthForNextRound());
+            assertEquals(6, lingo.getWordLengthForNextRound());
         }
 
         @Test
         @DisplayName("getWordLengthForNextRound berekent juiste woordlengte per ronde: 6 -> 7")
         void getWordLengthForNextRound_variesWithRoundCount_6_7() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
-            trainer.startNewRound(SIX_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(SIX_LETTER_ATTEMPT));
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+            lingo.startNewRound(SIX_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(SIX_LETTER_ATTEMPT));
 
-            assertEquals(7, trainer.getWordLengthForNextRound());
+            assertEquals(7, lingo.getWordLengthForNextRound());
         }
 
         @Test
         @DisplayName("getWordLengthForNextRound berekent juiste woordlengte per ronde: 7 -> 5")
         void getWordLengthForNextRound_variesWithRoundCount_7_5() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
-            trainer.startNewRound(SIX_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(SIX_LETTER_ATTEMPT));
-            trainer.startNewRound(SEVEN_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(SEVEN_LETTER_ATTEMPT));
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+            lingo.startNewRound(SIX_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(SIX_LETTER_ATTEMPT));
+            lingo.startNewRound(SEVEN_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(SEVEN_LETTER_ATTEMPT));
 
-            assertEquals(5, trainer.getWordLengthForNextRound());
+            assertEquals(5, lingo.getWordLengthForNextRound());
         }
     }
 
@@ -89,31 +89,31 @@ class LingoTrainerTest {
         @Test
         @DisplayName("startNewRound tijdens actieve ronde gooit RoundAlreadyStartedException")
         void startNewRound_whileInProgress_throwsException() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
 
             assertThrows(RoundAlreadyStartedException.class,
-                    () -> trainer.startNewRound(FIVE_LETTER_ATTEMPT));
+                    () -> lingo.startNewRound(FIVE_LETTER_ATTEMPT));
         }
 
         @Test
         @DisplayName("startNewRound na gewonnen ronde met verkeerde lengte gooit InvalidWordLengthException")
         void startNewRound_withInvalidWordLength_throwsException() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
 
-            trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+            lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
 
             // next length is 6, geef iets anders (5)
             assertThrows(InvalidWordLengthException.class,
-                    () -> trainer.startNewRound(FIVE_LETTER_ATTEMPT));
+                    () -> lingo.startNewRound(FIVE_LETTER_ATTEMPT));
         }
 
         @Test
         @DisplayName("startNewRound na gewonnen ronde start nieuwe ronde correct")
         void startNewRound_afterWin_startsNewRound() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
-            trainer.startNewRound(SIX_LETTER_ATTEMPT);
-            assertEquals(GameStatus.IN_PROGRESS, trainer.getStatus());
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+            lingo.startNewRound(SIX_LETTER_ATTEMPT);
+            assertEquals(GameStatus.IN_PROGRESS, lingo.getStatus());
         }
 
         @Nested
@@ -123,38 +123,38 @@ class LingoTrainerTest {
             @Test
             @DisplayName("correcte gok zet status op LAST_ROUND_WON en solution wordt zichtbaar")
             void correctGuess_winsRound() {
-                LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
+                Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
 
-                trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+                lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
 
-                assertEquals(GameStatus.LAST_ROUND_WON, trainer.getStatus());
-                assertEquals(FIVE_LETTER_ATTEMPT, trainer.getSolution());
+                assertEquals(GameStatus.LAST_ROUND_WON, lingo.getStatus());
+                assertEquals(FIVE_LETTER_ATTEMPT, lingo.getSolution());
             }
 
             @Test
             @DisplayName("guessWord na gewonnen ronde gooit NoActiveRoundException")
             void guessWord_afterWin_throwsNoActiveRound() {
-                LingoTrainer trainer = LingoTrainer.startGame("apple");
-                trainer.guessWord(validAttempt("apple"));
+                Lingo lingo = Lingo.startGame("apple");
+                lingo.guessWord(validAttempt("apple"));
 
                 assertThrows(NoActiveRoundException.class,
-                        () -> trainer.guessWord(validAttempt("apple")));
+                        () -> lingo.guessWord(validAttempt("apple")));
             }
 
             @Test
             @DisplayName("guessWord na verloren spel gooit GameOverException")
             void guessWord_afterGameOver_throwsGameOver() {
-                LingoTrainer trainer = LingoTrainer.startGame("apple");
+                Lingo lingo = Lingo.startGame("apple");
 
                 // Forceer verlies: herhaaldelijk fout (maar wel 'valid') gokken tot status != IN_PROGRESS
-                while (trainer.getStatus() == GameStatus.IN_PROGRESS) {
-                    trainer.guessWord(validAttempt("wrong"));
+                while (lingo.getStatus() == GameStatus.IN_PROGRESS) {
+                    lingo.guessWord(validAttempt("wrong"));
                 }
 
-                assertEquals(GameStatus.LOST, trainer.getStatus());
+                assertEquals(GameStatus.LOST, lingo.getStatus());
 
                 assertThrows(GameOverException.class,
-                        () -> trainer.guessWord(validAttempt("apple")));
+                        () -> lingo.guessWord(validAttempt("apple")));
             }
         }
 
@@ -176,26 +176,26 @@ class LingoTrainerTest {
             @MethodSource("scoreExamples")
             @DisplayName("score is positief na gewonnen ronde (ongeacht aantal pogingen)")
             void score_afterWinningRound(int wrongAttempts, int expectedScore) {
-                LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
+                Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
 
                 for (int i = 0; i < wrongAttempts; i++) {
-                    trainer.guessWord(validAttempt("wrong"));
+                    lingo.guessWord(validAttempt("wrong"));
                 }
-                trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
+                lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT));
 
-                assertEquals(GameStatus.LAST_ROUND_WON, trainer.getStatus());
-                assertEquals(expectedScore, trainer.getScore());
+                assertEquals(GameStatus.LAST_ROUND_WON, lingo.getStatus());
+                assertEquals(expectedScore, lingo.getScore());
             }
         }
 
         @Test
         @DisplayName("Score wordt opgeteld over meerdere rondes")
         void score_accumulatesOverRounds() {
-            LingoTrainer trainer = LingoTrainer.startGame(FIVE_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(FIVE_LETTER_ATTEMPT)); // +25
-            trainer.startNewRound(SIX_LETTER_ATTEMPT);
-            trainer.guessWord(validAttempt(SIX_LETTER_ATTEMPT)); // +25
-            assertEquals(50, trainer.getScore());
+            Lingo lingo = Lingo.startGame(FIVE_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(FIVE_LETTER_ATTEMPT)); // +25
+            lingo.startNewRound(SIX_LETTER_ATTEMPT);
+            lingo.guessWord(validAttempt(SIX_LETTER_ATTEMPT)); // +25
+            assertEquals(50, lingo.getScore());
         }
     }
 }

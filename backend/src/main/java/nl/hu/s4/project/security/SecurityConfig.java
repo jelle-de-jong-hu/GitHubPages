@@ -67,7 +67,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 		    .authorizeHttpRequests(r -> r
 				    .requestMatchers(antMatcher(POST, REGISTER_PATH), antMatcher(GET, REGISTER_PATH)).permitAll()
 				    .requestMatchers(antMatcher(POST, LOGIN_PATH), antMatcher(GET, REGISTER_PATH)).permitAll()
-				    .requestMatchers("/trainer/**").permitAll()
+				    .requestMatchers("/lingo/**").permitAll()
 				    .requestMatchers(antMatcher("/error")).anonymous()
 				    .anyRequest().authenticated()
 		    )

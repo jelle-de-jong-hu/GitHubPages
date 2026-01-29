@@ -1,19 +1,19 @@
 @gameId = 52
 
 ### Start a new game
-POST http://localhost:8080/api/trainer
+POST http://localhost:8080/api/lingo
 Accept: application/json
 
 ### List all games
-GET http://localhost:8080/api/trainer/
+GET http://localhost:8080/api/lingo
 Accept: application/json
 
 ### Get a game by id (replace {{gameId}} with the id from the POST response)
-GET http://localhost:8080/api/trainer/{{gameId}}
+GET http://localhost:8080/api/lingo/{{gameId}}
 Accept: application/json
 
 ### Make a guess for a game (replace {{gameId}})
-PATCH http://localhost:8080/api/trainer/{{gameId}}
+PATCH http://localhost:8080/api/lingo/{{gameId}}
 Content-Type: application/json
 
 {
@@ -21,5 +21,5 @@ Content-Type: application/json
 }
 
 ### Start a new round for a game (replace {{gameId}})
-PATCH http://localhost:8080/api/trainer/{{gameId}}/round
+PATCH http://localhost:8080/api/lingo/{{gameId}}/round
 Accept: application/json

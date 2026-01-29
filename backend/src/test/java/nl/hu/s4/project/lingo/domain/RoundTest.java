@@ -1,6 +1,6 @@
-package nl.hu.s4.project.trainer.domain;
+package nl.hu.s4.project.lingo.domain;
 
-import nl.hu.s4.project.trainer.domain.exception.MaxAttemptsReachedException;
+import nl.hu.s4.project.lingo.domain.exception.MaxAttemptsReachedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

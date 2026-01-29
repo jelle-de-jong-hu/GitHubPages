@@ -1,7 +1,7 @@
-package nl.hu.s4.project.trainer.data;
+package nl.hu.s4.project.lingo.data;
 
 import jakarta.persistence.AttributeConverter;
-import nl.hu.s4.project.trainer.domain.Mark;
+import nl.hu.s4.project.lingo.domain.Mark;
 
 import java.util.Arrays;
 import java.util.Collections;

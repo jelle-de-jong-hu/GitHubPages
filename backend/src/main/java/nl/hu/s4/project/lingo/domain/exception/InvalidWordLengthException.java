@@ -1,4 +1,4 @@
-package nl.hu.s4.project.trainer.domain.exception;
+package nl.hu.s4.project.lingo.domain.exception;
 
 public class InvalidWordLengthException extends RuntimeException {
     public InvalidWordLengthException(String solution, int expectedLength) {

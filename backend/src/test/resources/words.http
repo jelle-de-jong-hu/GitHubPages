@@ -1,6 +1,6 @@
 # Variables
-host = http://localhost:8080/api
-word = example
+@host = http://localhost:8080/api
+@word = example
 
 ### List all words
 GET {{host}}/words
